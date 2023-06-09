@@ -1,1 +1,1 @@
-pyinstaller -F yargUpdater.py
+pyinstaller -F --icon icon.ico yargUpdater.py
