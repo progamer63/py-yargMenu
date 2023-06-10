@@ -2,19 +2,17 @@ import os
 import requests
 import shutil
 import wget
-
+cd = os.path.realpath(os.path.dirname(__file__))
 #find dir or make it
 docs = os.path.expanduser('~\Documents')
 os.chdir(docs)
 path = (docs+'\YARG')
 exists = os.path.exists(path)
-#print(str(path)+" "+str(exists))
 if (exists == True):
     print(f'{path} exists')
 if (exists == False):
     os.mkdir(path)
     exists = os.path.exists(path)
-    #print(str(path)+" "+str(exists))
     print(f"made {path}")
 print()
 
@@ -93,4 +91,5 @@ if (needToUpdate == True):
         os.remove(f'{root}/YARG_v{lver}-Windows-x64.zip')
 if (needToUpdate == False):
     print("no need to update :)")
-input("any key to exit...")
+input("press any key to go to main menu")
+import menu

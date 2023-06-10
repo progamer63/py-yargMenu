@@ -1,1 +1,1 @@
-pyinstaller -F --icon icon.ico yargUpdater.py
+pyinstaller -F -n py-yargMenu --icon icon.ico menu.py
