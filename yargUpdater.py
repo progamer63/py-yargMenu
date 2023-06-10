@@ -49,9 +49,6 @@ lver = resp.split("v")[1]
 print("latest from github is "+lver)
 
 #find the most up to date version you have
-#print(vers)
-#lver = lver[2:]
-#vers = [e[2:] for e in vers]
 newestlocalver = max(vers)
 print(newestlocalver+ " is the newest version of the game you have")
 if (newestlocalver > lver):
@@ -74,11 +71,6 @@ if (needToUpdate == True):
     print("downloading from "+url)
     print("this can take a while")
     if (os.path.exists(f'YARG_v{lver}-Windows-x64.zip') == False):
-        #down = requests.get(url, allow_redirects=True)
-        #print("downloaded")
-        #with open(f'YARG_v{lver}-Windows-x64.zip','wb') as f:
-            #f.write(down.content)
-            #print("wrote file")
         wget.download(url)
         print("downloaded")
     if (os.path.exists(f'YARG_v{lver}-Windows-x64.zip') == True):

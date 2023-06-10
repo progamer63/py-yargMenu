@@ -1,5 +1,4 @@
 import os
-import requests
 import sys
 cd = os.path.realpath(os.path.dirname(__file__))
 #find dir or make it
@@ -41,18 +40,8 @@ for item in yargs:
     item = item.split("v")[1]
     vers.append(item)
     #print(item)
-    
-#make request finally
-print("fetching latest version from github")
-latest = requests.get('https://github.com/YARC-Official/YARG/releases/latest')
-resp = latest.url
-lver = resp.split("v")[1]
-print("latest from github is "+lver)
 
 #find the most up to date version you have
-#print(vers)
-#lver = lver[2:]
-#vers = [e[2:] for e in vers]
 newestlocalver = max(vers)
 print(newestlocalver+ " is the newest version of the game you have & is the one that will be opened")
 path = f'{root}\YARG_v{newestlocalver}-Windows-x64'
