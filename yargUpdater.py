@@ -70,12 +70,26 @@ if (needToUpdate == True):
     url = f'https://github.com/EliteAsian123/YARG/releases/download/v{lver}/YARG_v{lver}-Windows-x64.zip'
     print("downloading from "+url)
     print("this can take a while")
-    if (os.path.exists(f'YARG_v{lver}-Windows-x64.zip') == False):
-        wget.download(url)
-        print("downloaded")
-    if (os.path.exists(f'YARG_v{lver}-Windows-x64.zip') == True):
-        print("already downloaed")
-    print("unzipping")
+    if (lver == '0.10.7'):
+        print('devs typod file name, patching my code')
+        url = f'https://github.com/EliteAsian123/YARG/releases/download/v{lver}/YARG_v1.10.7-Windows-x64.zip'
+    if (lver != '0.10.7'):
+        if (os.path.exists(f'YARG_v{lver}-Windows-x64.zip') == False):
+            wget.download(url)
+            print("downloaded")
+        if (os.path.exists(f'YARG_v{lver}-Windows-x64.zip') == True):
+            print("already downloaed")
+        print("unzipping")
+    if (lver == '0.10.7'):
+        if (os.path.exists(f'YARG_v1.10.7-Windows-x64.zip') == False):
+            wget.download(url)
+            print("downloaded")
+        if (os.path.exists(f'YARG_v1.10.7-Windows-x64.zip') == True):
+            print("already downloaed")
+        print("unzipping")
+    if (lver == '0.10.7'):
+        print('devs typod file name, patching my code pt2')
+        os.rename(f'{root}/YARG_v1.10.7-Windows-x64.zip', f'{root}/YARG_v{lver}-Windows-x64.zip')
     shutil.unpack_archive(f'{root}/YARG_v{lver}-Windows-x64.zip', f'YARG_v{lver}-Windows-x64')
     print("unzipped")
     print("deleting source .zip")
