@@ -15,6 +15,15 @@ if (exists == False):
     exists = os.path.exists(path)
     print(f"made {path}")
 print()
+temp = (path+'\Temp')
+exists = os.path.exists(temp)
+if (exists == True):
+    print(f'{temp} exists')
+if (exists == False):
+    os.mkdir(temp)
+    exists = os.path.exists(temp)
+    print(f"made {temp}")
+print()
 
 #find all yargs
 root = path
@@ -32,7 +41,7 @@ for f in fnames:
     if f.startswith("YARG"):
         yargs.append(f) 
 #print(yargs)
-        
+
 #get all version numbers
 vers = []
 for item in yargs:
@@ -62,34 +71,34 @@ elif (newestlocalver < lver):
     print ("you have an older version: "+item+" vs "+lver)
     needToUpdate = True
 
+#use vers dict now
+os.chdir(temp)
+print('downloading versions dictionary')
+dictUrl='https://raw.githubusercontent.com/progamer63/py-yargMenu/main/acceptedVers.py'
+wget.download(dictUrl)
+os.system('cls')
+from acceptedVers import versList
+lookingVer = lver
+for ver in versList:
+    #print(f'got ver {ver}')
+    if ver not in versList:
+        print('found a version not in my dict')
+if lookingVer in versList:
+    url = versList[f'{lookingVer}']
+
 #if need to update, do that stuff lol
 if (needToUpdate == True):
     print()
     os.chdir(root)
     print("updating from "+newestlocalver+" to "+lver)
-    url = f'https://github.com/EliteAsian123/YARG/releases/download/v{lver}/YARG_v{lver}-Windows-x64.zip'
     print("downloading from "+url)
     print("this can take a while")
-    if (lver == '0.10.7'):
-        print('devs typod file name, patching my code')
-        url = f'https://github.com/EliteAsian123/YARG/releases/download/v{lver}/YARG_v1.10.7-Windows-x64.zip'
-    if (lver != '0.10.7'):
-        if (os.path.exists(f'YARG_v{lver}-Windows-x64.zip') == False):
-            wget.download(url)
-            print("downloaded")
-        if (os.path.exists(f'YARG_v{lver}-Windows-x64.zip') == True):
-            print("already downloaed")
-        print("unzipping")
-    if (lver == '0.10.7'):
-        if (os.path.exists(f'YARG_v1.10.7-Windows-x64.zip') == False):
-            wget.download(url)
-            print("downloaded")
-        if (os.path.exists(f'YARG_v1.10.7-Windows-x64.zip') == True):
-            print("already downloaed")
-        print("unzipping")
-    if (lver == '0.10.7'):
-        print('devs typod file name, patching my code pt2')
-        os.rename(f'{root}/YARG_v1.10.7-Windows-x64.zip', f'{root}/YARG_v{lver}-Windows-x64.zip')
+    if (os.path.exists(f'YARG_v{lver}-Windows-x64.zip') == False):
+        wget.download(url)
+        print("downloaded")
+    if (os.path.exists(f'YARG_v{lver}-Windows-x64.zip') == True):
+        print("already downloaed")
+    print("unzipping")
     shutil.unpack_archive(f'{root}/YARG_v{lver}-Windows-x64.zip', f'YARG_v{lver}-Windows-x64')
     print("unzipped")
     print("deleting source .zip")
@@ -97,5 +106,12 @@ if (needToUpdate == True):
         os.remove(f'{root}/YARG_v{lver}-Windows-x64.zip')
 if (needToUpdate == False):
     print("no need to update :)")
+
+#clear temp folder
+print('clearing temp folder')
+os.chdir(temp)
+for i in os.listdir(temp):
+    if i.endswith('.py'):
+        os.remove(i)
 input("press any key to go to main menu")
 import menu
